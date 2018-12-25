@@ -20,8 +20,6 @@ class SeleniumTestCase(unittest.TestCase):
 
     def tearDown(self):
         time.sleep(3)
-
-       # /Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages
     
     def test_search1(self):
         # navigate to home page
