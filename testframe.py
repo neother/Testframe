@@ -7,6 +7,7 @@ from logger import Logger
 import HTMLTestRunner
 import os
 import sys
+import logging
 class SeleniumTestCase(unittest.TestCase):
 
 
@@ -19,7 +20,8 @@ class SeleniumTestCase(unittest.TestCase):
         self.driver.get('http://baidu.com')
 
     def tearDown(self):
-        time.sleep(3)
+        time.sleep(1)
+        self.driver.quit()
     
     def test_search1(self):
         # navigate to home page
@@ -28,17 +30,20 @@ class SeleniumTestCase(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_id('su').click()
 
-        self.assertTrue(re.search('selenium',self.driver.page_source))
+        #self.assertTrue(re.search('selenfuncjium',self.driver.page_source))
+       
+        self.assertIn('bith', self.driver.title)
+        logging.error('test pass')
+        
 '''
+
     def test_search2(self):
         self.driver.find_element_by_id('kw').send_keys('python')
         time.sleep(1)
         self.driver.find_element_by_id('su').click()
 
         self.assertTrue(re.search('failed',self.driver.page_source))
-'''
- 
- 
+ '''
 if __name__ =='__main__':
 
         # 设置报告文件保存路径
@@ -55,4 +60,3 @@ if __name__ =='__main__':
     runner = HTMLTestRunner.HTMLTestRunner(stream=fp,verbosity=2)
     # 开始执行测试套件s
     runner.run(suite)
-    fp.close()
